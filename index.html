@@ -16,7 +16,9 @@
             flex-direction: column;
             font-family: Arial, sans-serif;
             transition: background 0.5s ease-in-out;
+            margin: 0;
         }
+
         #gift-box {
             width: 200px;
             height: 200px;
@@ -24,9 +26,11 @@
             cursor: pointer;
             transition: transform 0.5s ease;
         }
+
         #gift-box:hover {
             transform: scale(1.1);
         }
+
         #reveal {
             display: none;
             margin-top: 20px;
@@ -37,6 +41,7 @@
             position: relative;
             z-index: 2;
         }
+
         .bg-image {
             position: fixed;
             top: 0;
@@ -47,10 +52,15 @@
             display: none;
             z-index: -1;
         }
+
         iframe {
             display: none;
             margin-top: 20px;
+            width: 100%; /* Make the iframe responsive */
+            max-width: 500px; /* Max width for larger screens */
+            height: 60px;
         }
+
         #intro-text {
             background: rgba(255, 255, 255, 0.8);
             padding: 20px;
@@ -59,6 +69,7 @@
             margin-bottom: 20px;
             font-weight: bold;
         }
+
         #play-button {
             display: none;
             margin-top: 20px;
@@ -71,6 +82,7 @@
             font-size: 18px;
             animation: pulse 1.5s infinite;
         }
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -85,6 +97,59 @@
                 opacity: 1;
             }
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #gift-box {
+                width: 150px;
+                height: 150px;
+            }
+
+            #reveal {
+                font-size: 18px;
+                padding: 12px;
+            }
+
+            iframe {
+                height: 50px;
+            }
+
+            #intro-text {
+                font-size: 18px;
+                padding: 15px;
+            }
+
+            #play-button {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #gift-box {
+                width: 120px;
+                height: 120px;
+            }
+
+            #reveal {
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            iframe {
+                height: 40px;
+            }
+
+            #intro-text {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            #play-button {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -96,7 +161,7 @@
     </div>
     <div class="bg-image" id="bg-image"></div>
     <!-- Music Player iframe, no autoplay, mute=false -->
-    <iframe id="music-player" src="https://archive.org/embed/carelesswhisper_201911?autoplay=0&mute=false" width="500" height="60" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+    <iframe id="music-player" src="https://archive.org/embed/carelesswhisper_201911?autoplay=0&mute=false" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
     <button id="play-button" onclick="playMusic()">Play Music</button>
 
     <script>
