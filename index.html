@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎁 Open Your Gift!</title>
+    <link rel="icon" href="https://i.ibb.co/GQLgqgSr/6664427.png" type="image/png"> <!-- Favicon -->
+    <style>
+        body {
+            text-align: center;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            transition: background 0.5s ease-in-out;
+        }
+        #gift-box {
+            width: 200px;
+            height: 200px;
+            background: url('https://i.ibb.co/GQLgqgSr/6664427.png') no-repeat center center/cover;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+        #gift-box:hover {
+            transform: scale(1.1);
+        }
+        #reveal {
+            display: none;
+            margin-top: 20px;
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('https://i.ibb.co/N2jYJCDX/473596498-1198169898976402-6427438765048534488-n.jpg') no-repeat center center/cover;
+            display: none;
+            z-index: -1;
+        }
+        iframe {
+            display: none;
+            margin-top: 20px;
+        }
+        #intro-text {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        #play-button {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="intro-text">Click the Gift to Open 🎁</div>
+    <div id="gift-box" onclick="openGift()"></div>
+    <div id="reveal">
+        <p>🎷 Enjoy the music & check out this amazing article!</p>
+        <a href="#" id="redirect-link" onclick="redirectToArticle()">Read the Article</a>
+    </div>
+    <div class="bg-image" id="bg-image"></div>
+    <!-- Music Player iframe, no autoplay, mute=false -->
+    <iframe id="music-player" src="https://archive.org/embed/carelesswhisper_201911?autoplay=0&mute=false" width="500" height="60" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+    <button id="play-button" onclick="playMusic()">Play Music</button>
+
+    <script>
+        function openGift() {
+            document.getElementById('intro-text').style.display = 'none';
+            document.getElementById('gift-box').style.transform = 'scale(0) rotate(360deg)';
+            
+            setTimeout(function() {
+                document.getElementById('reveal').style.display = 'block';
+                document.getElementById('bg-image').style.display = 'block';
+                // Show the play button to the user
+                document.getElementById('play-button').style.display = 'inline-block';
+            }, 1000); // Delay to match animation time (1 second)
+        }
+
+        function playMusic() {
+            var musicPlayer = document.getElementById('music-player');
+            // Reset the music iframe source to stop it from autoplaying on page load
+            musicPlayer.src = "https://archive.org/embed/carelesswhisper_201911?autoplay=1&mute=false";
+            musicPlayer.style.display = "block"; // Display the music player after play button is clicked
+            document.getElementById('play-button').style.display = 'none'; // Hide the play button after it's clicked
+        }
+
+        // Redirect to the article in a new tab
+        function redirectToArticle() {
+            window.open("https://www.dailymirror.lk/news-features/100-Meetings-100-Lives-Changed-Central-Link-Toastmasters-a-legacy-in-the-making/131-303444", "_blank");
+            window.location.href = "#"; // Keeps the music page open
+        }
+    </script>
+</body>
+</html>
